@@ -1,922 +1,267 @@
-<html lang="zh-CN"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GEO 内容库搭建计划</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+<!DOCTYPE html>
+<html lang="zh-CN">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NISE 应用商店上架方案 | App Store Listing Plan</title>
+  <title>NISE App Store Listing Plan | ASO Strategy & Keywords</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+@@ -41,12 +41,6 @@
+    .nav-btn { padding: 8px 20px; border-radius: 50px; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: var(--text2); background: transparent; transition: all 0.22s ease; white-space: nowrap; }
+    .nav-btn:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+    .nav-btn.active { background: linear-gradient(135deg, var(--teal), #00BF96); color: #040D14; font-weight: 700; box-shadow: 0 2px 18px rgba(0,230,178,0.3); }
+    .lang-toggle { display: flex; gap: 2px; background: rgba(255,255,255,0.04); padding: 4px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.07); }
+    .lang-btn { padding: 6px 14px; border-radius: 50px; border: none; cursor: pointer; font-size: 12px; font-weight: 600; color: var(--text2); background: transparent; transition: all 0.22s ease; }
+    .lang-btn.active { background: rgba(0,230,178,0.15); color: var(--teal); border: 1px solid rgba(0,230,178,0.25); }
+    .en { display: none !important; }
+    html[lang="en"] .zh { display: none !important; }
+    html[lang="en"] .en { display: revert !important; }
+    main { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 44px 28px 72px; }
+    .panel { display: none; animation: fadeUp 0.38s ease; }
+    .panel.active { display: block; }
+@@ -55,6 +49,7 @@
+    .sec-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; }
+    .sec-eyebrow::before { content: ''; width: 16px; height: 2px; background: var(--teal); border-radius: 1px; }
+    .sec-title { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; letter-spacing: -0.4px; }
+    .sec-desc { color: var(--text2); font-size: 14px; margin-top: 6px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .plan-card { background: var(--cardBg); border: 1px solid var(--cardBorder); border-radius: 20px; overflow: hidden; transition: transform 0.28s ease, box-shadow 0.28s ease; }
+@@ -82,7 +77,6 @@
+    .chip-A { background: rgba(0,230,178,0.1); color: var(--A); }
+    .chip-B { background: rgba(255,209,102,0.1); color: var(--B); }
+    .chip-C { background: rgba(91,143,255,0.1); color: var(--C); }
+    /* APP 描述样式：大标题 + 三个小点（无加粗前缀） */
+    .desc-new-title { font-size: 15px; font-weight: 700; color: var(--text); margin: 20px 0 12px 0; letter-spacing: -0.2px; border-left: 2px solid var(--teal); padding-left: 12px; }
+    .desc-new-title:first-of-type { margin-top: 0; }
+    .desc-feature-list { list-style: none; margin: 0 0 18px 0; padding: 0; }
+@@ -117,33 +111,29 @@
+      <div class="logo-mark">N</div>
+      <div class="logo-info">
+        <div class="logo-name">NISE</div>
+        <div class="logo-sub"><span class="zh">App 上架方案</span><span class="en">App Listing Plan</span></div>
+        <div class="logo-sub">App Listing Plan</div>
+      </div>
+    </a>
+    <div class="header-right">
+      <nav>
+        <button class="nav-btn" data-panel="keywords"><span class="zh">关键词</span><span class="en">Keywords</span></button>
+        <button class="nav-btn" data-panel="tagline"><span class="zh">APP 主副标</span><span class="en">App Title</span></button>
+        <button class="nav-btn" data-panel="description"><span class="zh">APP 描述</span><span class="en">Description</span></button>
+        <button class="nav-btn active" data-panel="visual"><span class="zh">图片优势展示</span><span class="en">Screenshots</span></button>
+        <button class="nav-btn" data-panel="keywords">Keywords</button>
+        <button class="nav-btn" data-panel="tagline">App Title</button>
+        <button class="nav-btn" data-panel="description">Description</button>
+        <button class="nav-btn active" data-panel="visual">Screenshots</button>
+      </nav>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+  <!-- 关键词板块 -->
+  <!-- KEYWORDS PANEL -->
+  <div class="panel" id="panel-keywords">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Panel 01</div>
+      <h2 class="sec-title"><span class="zh">关键词部署</span><span class="en">Keyword Deployment</span></h2>
+      <p class="sec-desc"><span class="zh">ASO 核心关键词汇总，覆盖优先流量词与方向分析。</span><span class="en">ASO core keyword summary covering priority traffic terms and directional analysis.</span></p>
+      <h2 class="sec-title">Keyword Deployment</h2>
+      <p class="sec-desc">ASO core keyword summary covering priority traffic terms and directional analysis.</p>
+    </div>
+    <div class="kw-summary">
+      <div class="kw-summary-title">✦ <span class="zh">最终关键词部署方案</span><span class="en">Final Keyword Deployment</span></div>
+      <div class="kw-summary-title">✦ Final Keyword Deployment</div>
+      <div class="kw-tags">
+        <span class="tag tag-hi">trading 212</span>
+        <span class="tag tag-hi">interactive brokers</span>
+@@ -156,56 +146,55 @@ <h2 class="sec-title"><span class="zh">关键词部署</span><span class="en">Ke
+        <span class="tag">US shares</span>
+      </div>
+      <div class="kw-summary-note" style="margin-top:14px; font-size:13px; color:var(--text2);">
+        <span class="zh"><strong>高亮词</strong>为核心优先词：难度低（&lt;30）、有效性高（≥76），是全新 App 安全且值得优先投入的流量关键词。</span>
+        <span class="en"><strong>Highlighted terms</strong> are core priority keywords: low difficulty (&lt;30), high effectiveness (≥76) — safe, high-ROI traffic terms for a new App.</span>
+        <strong>Highlighted terms</strong> are core priority keywords: low difficulty (&lt;30), high effectiveness (≥76) — safe, high-ROI traffic terms for a new App.
+      </div>
+    </div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">
+      <span class="zh">五个优先关键词的价值定位</span><span class="en">Value Positioning of 5 Priority Keywords</span>
+      Value Positioning of 5 Priority Keywords
+    </div>
+    <div class="kw-value-grid">
+      <div class="kw-value-card"><div class="kw-value-name">interactive brokers</div><div class="kw-value-stat"><span class="zh">热度最高（51）<br>难度低（26）<br>竞品引流首选</span><span class="en">Highest volume (51)<br>Low difficulty (26)<br>Top competitor traffic term</span></div></div>
+      <div class="kw-value-card"><div class="kw-value-name">paper trading</div><div class="kw-value-stat"><span class="zh">难度最低（24）<br>吸引新手投资者<br>易转化为活跃用户</span><span class="en">Lowest difficulty (24)<br>Attracts beginner investors<br>Converts well to active users</span></div></div>
+      <div class="kw-value-card"><div class="kw-value-name">stock trading</div><div class="kw-value-stat"><span class="zh">指标均衡<br>必须攻下的核心阵地<br>覆盖主流搜索意图</span><span class="en">Balanced metrics<br>Must-win core battleground<br>Covers mainstream search intent</span></div></div>
+      <div class="kw-value-card"><div class="kw-value-name">cmc invest</div><div class="kw-value-stat"><span class="zh">竞品词<br>性价比极高<br>截流竞品用户</span><span class="en">Competitor keyword<br>Exceptional value<br>Intercept competitor users</span></div></div>
+      <div class="kw-value-card"><div class="kw-value-name">trading 212</div><div class="kw-value-stat"><span class="zh">有效性 76<br>搜竞品的用户<br>愿意尝试新产品</span><span class="en">Effectiveness 76<br>Users searching competitors<br>Open to trying new products</span></div></div>
+      <div class="kw-value-card"><div class="kw-value-name">interactive brokers</div><div class="kw-value-stat">Highest volume (51)<br>Low difficulty (26)<br>Top competitor traffic term</div></div>
+      <div class="kw-value-card"><div class="kw-value-name">paper trading</div><div class="kw-value-stat">Lowest difficulty (24)<br>Attracts beginner investors<br>Converts well to active users</div></div>
+      <div class="kw-value-card"><div class="kw-value-name">stock trading</div><div class="kw-value-stat">Balanced metrics<br>Must-win core battleground<br>Covers mainstream search intent</div></div>
+      <div class="kw-value-card"><div class="kw-value-name">cmc invest</div><div class="kw-value-stat">Competitor keyword<br>Exceptional value<br>Intercept competitor users</div></div>
+      <div class="kw-value-card"><div class="kw-value-name">trading 212</div><div class="kw-value-stat">Effectiveness 76<br>Users searching competitors<br>Open to trying new products</div></div>
+    </div>
+    <div class="kw-summary" style="background:rgba(91,143,255,.04);border-color:rgba(91,143,255,.14);">
+      <div class="kw-summary-title" style="color:var(--blue);">✦ <span class="zh">策略总结</span><span class="en">Strategy Summary</span></div>
+      <div class="kw-summary-note" style="margin-top:0;"><span class="zh"><strong>interactive brokers、paper trading、stock trading、cmc invest、trading 212</strong> — 难度低（&lt;30）、有效性高（≥76），是全新 App 安全且值得优先投入的流量关键词。配合 <strong>shares、invest、asx、US shares</strong> 等基础词扩大覆盖面，在规避高竞争词的同时实现精准拦截。</span><span class="en"><strong>interactive brokers, paper trading, stock trading, cmc invest, trading 212</strong> — low difficulty (&lt;30), high effectiveness (≥76), safe priority traffic keywords for a new App. Complement with <strong>shares, invest, asx, US shares</strong> to broaden coverage while avoiding high-competition terms and achieving precise interception.</span></div>
+      <div class="kw-summary-title" style="color:var(--blue);">✦ Strategy Summary</div>
+      <div class="kw-summary-note" style="margin-top:0;"><strong>interactive brokers, paper trading, stock trading, cmc invest, trading 212</strong> — low difficulty (&lt;30), high effectiveness (≥76), safe priority traffic keywords for a new App. Complement with <strong>shares, invest, asx, US shares</strong> to broaden coverage while avoiding high-competition terms and achieving precise interception.</div>
+    </div>
+  </div>
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <!-- APP 主副标题板块（五个方案横向对比） -->
+  <!-- APP TITLE & SUBTITLE (5 plans) -->
+  <div class="panel" id="panel-tagline">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Panel 02</div>
+      <h2 class="sec-title"><span class="zh">APP 主副标题</span><span class="en">App Title &amp; Subtitle</span></h2>
+      <p class="sec-desc"><span class="zh">五个方案的 App 主标题与副标题，横向对比定位差异。</span><span class="en">Five plans with App titles and subtitles for side-by-side positioning comparison.</span></p>
+      <h2 class="sec-title">App Title & Subtitle</h2>
+      <p class="sec-desc">Five plans with App titles and subtitles for side-by-side positioning comparison.</p>
+    </div>
+    <div class="grid-5">
+      <div class="plan-card pA" style="padding:26px"><div class="badge bA"><span class="dot"></span><span class="zh">方案 A</span><span class="en">Plan A</span></div><div class="tagline-label"><span class="zh">主标题</span><span class="en">TITLE</span></div><div class="tagline-main-t">NISE Invest</div><div class="tagline-label"><span class="zh">副标题</span><span class="en">SUBTITLE</span></div><div class="tagline-sub">US Stocks &amp; More.</div></div>
+      <div class="plan-card pB" style="padding:26px"><div class="badge bB"><span class="dot"></span><span class="zh">方案 B</span><span class="en">Plan B</span></div><div class="tagline-label"><span class="zh">主标题</span><span class="en">TITLE</span></div><div class="tagline-main-t">NISE: Invest. Trade.</div><div class="tagline-label"><span class="zh">副标题</span><span class="en">SUBTITLE</span></div><div class="tagline-sub">US Stocks &amp; Paper Trading</div></div>
+      <div class="plan-card pC" style="padding:26px"><div class="badge bC"><span class="dot"></span><span class="zh">方案 C</span><span class="en">Plan C</span></div><div class="tagline-label"><span class="zh">主标题</span><span class="en">TITLE</span></div><div class="tagline-main-t">NISE: Invest. Trade.</div><div class="tagline-label"><span class="zh">副标题</span><span class="en">SUBTITLE</span></div><div class="tagline-sub">Build your ultimate US stock portfolio.</div></div>
+      <div class="plan-card pD" style="padding:26px"><div class="badge bD"><span class="dot"></span><span class="zh">方案 D</span><span class="en">Plan D</span></div><div class="tagline-label"><span class="zh">主标题</span><span class="en">TITLE</span></div><div class="tagline-main-t">NISE - US Stocks</div><div class="tagline-label"><span class="zh">副标题</span><span class="en">SUBTITLE</span></div><div class="tagline-sub">Unleash your trading potential.</div></div>
+      <div class="plan-card pE" style="padding:26px"><div class="badge bE"><span class="dot"></span><span class="zh">方案 E</span><span class="en">Plan E</span></div><div class="tagline-label"><span class="zh">主标题</span><span class="en">TITLE</span></div><div class="tagline-main-t">NISE-Trading &amp; Investing</div><div class="tagline-label"><span class="zh">副标题</span><span class="en">SUBTITLE</span></div><div class="tagline-sub">Trade US Stocks. Practice with Paper Trading.</div></div>
+      <div class="plan-card pA" style="padding:26px"><div class="badge bA">Plan A</div><div class="tagline-label">TITLE</div><div class="tagline-main-t">NISE Invest</div><div class="tagline-label">SUBTITLE</div><div class="tagline-sub">US Stocks &amp; More.</div></div>
+      <div class="plan-card pB" style="padding:26px"><div class="badge bB">Plan B</div><div class="tagline-label">TITLE</div><div class="tagline-main-t">NISE: Invest. Trade.</div><div class="tagline-label">SUBTITLE</div><div class="tagline-sub">US Stocks &amp; Paper Trading</div></div>
+      <div class="plan-card pC" style="padding:26px"><div class="badge bC">Plan C</div><div class="tagline-label">TITLE</div><div class="tagline-main-t">NISE: Invest. Trade.</div><div class="tagline-label">SUBTITLE</div><div class="tagline-sub">Build your ultimate US stock portfolio.</div></div>
+      <div class="plan-card pD" style="padding:26px"><div class="badge bD">Plan D</div><div class="tagline-label">TITLE</div><div class="tagline-main-t">NISE - US Stocks</div><div class="tagline-label">SUBTITLE</div><div class="tagline-sub">Unleash your trading potential.</div></div>
+      <div class="plan-card pE" style="padding:26px"><div class="badge bE">Plan E</div><div class="tagline-label">TITLE</div><div class="tagline-main-t">NISE-Trading &amp; Investing</div><div class="tagline-label">SUBTITLE</div><div class="tagline-sub">Trade US Stocks. Practice with Paper Trading.</div></div>
+    </div>
+  </div>
 
-  :root {
-    --bg: #0D0F14;
-    --surface: #13161D;
-    --surface2: #1A1E27;
-    --border: #232836;
-    --border2: #2E3447;
-    --text: #E8EAF0;
-    --text2: #8892A4;
-    --text3: #525D72;
-    --accent: #4F7EFF;
-    --accent-dim: rgba(79,126,255,0.12);
-    --accent-glow: rgba(79,126,255,0.25);
-    --green: #2DD4A0;
-    --green-dim: rgba(45,212,160,0.1);
-    --amber: #F5A623;
-    --amber-dim: rgba(245,166,35,0.1);
-    --coral: #FF6B6B;
-    --coral-dim: rgba(255,107,107,0.1);
-    --purple: #A78BFA;
-    --purple-dim: rgba(167,139,250,0.1);
-    --nav-h: 56px;
-    --transition: 0.22s cubic-bezier(0.4,0,0.2,1);
+  <!-- APP 描述板块（删除每条前面的加粗标题，仅保留符号+说明文字） -->
+  <!-- APP DESCRIPTION (3 plans - full structure) -->
+  <div class="panel" id="panel-description">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Panel 03</div>
+      <h2 class="sec-title"><span class="zh">APP 完整描述</span><span class="en">Full App Description</span></h2>
+      <p class="sec-desc"><span class="zh">三个最新方案的完整功能描述，采用“一个大标题 + 三个要点”结构。</span><span class="en">Three updated plans with 'one main title + three key points' structure.</span></p>
+      <h2 class="sec-title">Full App Description</h2>
+      <p class="sec-desc">Three updated plans with 'one main title + three key points' structure.</p>
+    </div>
+    <div class="grid-3">
+      <!-- 方案 A -->
+      <!-- Plan A -->
+      <div class="plan-card" style="padding:22px">
+        <div class="badge bA"><span class="dot"></span><span class="zh">方案 A</span><span class="en">Plan A</span></div>
+        <div class="desc-chip chip-A"><span class="zh">顶部短描述</span><span class="en">Short Description</span></div>
+        <div class="badge bA">Plan A</div>
+        <div class="desc-chip chip-A">Short Description</div>
+        <div class="desc-top-blurb">NISE is a Australia-based investing platform with seamless access to 5,000+ US stocks and automatic yield on every uninvested dollar in your account — so your capital is always working, even between trades.</div>
+        <div class="desc-chip chip-A"><span class="zh">详细描述</span><span class="en">Detailed Description</span></div>
+        <div class="desc-chip chip-A">Detailed Description</div>
+        <div class="desc-new-title">Yield on Cash</div>
+        <ul class="desc-feature-list">
+          <li><span class="bullet">•</span> Your uninvested USD balance earns yield automatically: daily accrual, monthly payouts.</li>
+@@ -231,13 +220,12 @@ <h2 class="sec-title"><span class="zh">APP 完整描述</span><span class="en">F
+          <li><span class="bullet">•</span> Two-factor authentication to help protect your account.</li>
+        </ul>
+      </div>
+      <!-- 方案 B -->
+      <!-- Plan B -->
+      <div class="plan-card" style="padding:22px">
+        <div class="badge bB"><span class="dot"></span><span class="zh">方案 B</span><span class="en">Plan B</span></div>
+        <div class="desc-chip chip-B"><span class="zh">顶部短描述</span><span class="en">Short Description</span></div>
+        <div class="desc-top-blurb">NISE is a Australia
+          -based investing platform where your cash earns competitive returns while you wait. Access 5,000+ US stocks with 24/5 trading — and earn yield on every uninvested dollar in your account.</div>
+        <div class="desc-chip chip-B"><span class="zh">详细描述</span><span class="en">Detailed Description</span></div>
+        <div class="badge bB">Plan B</div>
+        <div class="desc-chip chip-B">Short Description</div>
+        <div class="desc-top-blurb">NISE is a Australia-based investing platform where your cash earns competitive returns while you wait. Access 5,000+ US stocks with 24/5 trading — and earn yield on every uninvested dollar in your account.</div>
+        <div class="desc-chip chip-B">Detailed Description</div>
+        <div class="desc-new-title">Yield on Idle Cash</div>
+        <ul class="desc-feature-list">
+          <li><span class="bullet">•</span> Earn competitive returns on your uninvested USD — no separate account needed.</li>
+@@ -263,12 +251,12 @@ <h2 class="sec-title"><span class="zh">APP 完整描述</span><span class="en">F
+          <li><span class="bullet">•</span> Bank-grade encryption and two-factor authentication on every account.</li>
+        </ul>
+      </div>
+      <!-- 方案 C -->
+      <!-- Plan C -->
+      <div class="plan-card" style="padding:22px">
+        <div class="badge bC"><span class="dot"></span><span class="zh">方案 C</span><span class="en">Plan C</span></div>
+        <div class="desc-chip chip-C"><span class="zh">顶部短描述</span><span class="en">Short Description</span></div>
+        <div class="badge bC">Plan C</div>
+        <div class="desc-chip chip-C">Short Description</div>
+        <div class="desc-top-blurb">NISE is a Australia-based app that puts 5,000+ US stocks at your fingertips. Earn yield on your idle USD between trades and access the full US market session 24/5 — from pre-market through after-hours.</div>
+        <div class="desc-chip chip-C"><span class="zh">详细描述</span><span class="en">Detailed Description</span></div>
+        <div class="desc-chip chip-C">Detailed Description</div>
+        <div class="desc-new-title">Yield on Cash</div>
+        <ul class="desc-feature-list">
+          <li><span class="bullet">•</span> Your USD balance earns yield automatically between trades — daily accrual, monthly payouts.</li>
+@@ -297,34 +285,34 @@ <h2 class="sec-title"><span class="zh">APP 完整描述</span><span class="en">F
+    </div>
+  </div>
+
+  <!-- 图片优势展示板块（最新三方案） -->
+  <!-- SCREENSHOT ADVANTAGE COPIES (3 plans) -->
+  <div class="panel active" id="panel-visual">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Panel 04</div>
+      <h2 class="sec-title"><span class="zh">图片优势展示</span><span class="en">Screenshot Advantage Copy</span></h2>
+      <p class="sec-desc"><span class="zh">文档最新三个“图片优势展示”方案，6张截图卖点文案横向对比。</span><span class="en">Three latest screenshot copy plans from document with 6 caption headlines + descriptions.</span></p>
+      <h2 class="sec-title">Screenshot Advantage Copy</h2>
+      <p class="sec-desc">Three latest screenshot copy plans with 6 caption headlines + descriptions.</p>
+    </div>
+    <div class="grid-3">
+      <!-- 方案1 -->
+      <div class="plan-card" style="padding:0; overflow:hidden"><div style="padding:22px 22px 0 22px"><div class="badge bA"><span class="dot"></span><span class="zh">方案1</span><span class="en">Plan 1</span></div></div>
+      <!-- Plan 1 Screenshots -->
+      <div class="plan-card" style="padding:0; overflow:hidden"><div style="padding:22px 22px 0 22px"><div class="badge bA">Plan 1</div></div>
+        <div class="adv-row"><div class="adv-item"><div class="adv-num num-A">1</div><div><div class="adv-title">Boost your cash</div><div class="adv-desc">Earn yield on uninvested USD, accrued daily.</div></div></div>
+        <div class="adv-item"><div class="adv-num num-A">2</div><div><div class="adv-title">One wallet for everything</div><div class="adv-desc">Trade 5,000+ US stocks, ETFs and fractional shares.</div></div></div>
+        <div class="adv-item"><div class="adv-num num-A">3</div><div><div class="adv-title">Lowest barrier</div><div class="adv-desc">Invest from as little as US$10 in global giants.</div></div></div>
+        <div class="adv-item"><div class="adv-num num-A">4</div><div><div class="adv-title">24-Hour Trading</div><div class="adv-desc">Trade US stocks 24h a day, 5 days a week, live pricing.</div></div></div>
+        <div class="adv-item"><div class="adv-num num-A">5</div><div><div class="adv-title">Smart Rankings</div><div class="adv-desc">Identify top opportunities across US markets.</div></div></div>
+        <div class="adv-item"><div class="adv-num num-A">6</div><div><div class="adv-title">ASIC Regulated</div><div class="adv-desc">Fully licensed and regulated in Australia.</div></div></div></div>
+      </div>
+      <!-- 方案2 -->
+      <div class="plan-card" style="padding:0; overflow:hidden"><div style="padding:22px 22px 0 22px"><div class="badge bB"><span class="dot"></span><span class="zh">方案2</span><span class="en">Plan 2</span></div></div>
+      <!-- Plan 2 Screenshots -->
+      <div class="plan-card" style="padding:0; overflow:hidden"><div style="padding:22px 22px 0 22px"><div class="badge bB">Plan 2</div></div>
+        <div class="adv-row"><div class="adv-item"><div class="adv-num num-B">1</div><div><div class="adv-title">Yield on Cash</div><div class="adv-desc">Competitive returns on uninvested USD, daily accrual.</div></div></div>
+        <div class="adv-item"><div class="adv-num num-B">2</div><div><div class="adv-title">Full market access</div><div class="adv-desc">5,000+ US Stocks from a single USD wallet.</div></div></div>
+        <div class="adv-item"><div class="adv-num num-B">3</div><div><div class="adv-title">Own the best</div><div class="adv-desc">From US$10 fractional shares in Tesla, Nvidia, Apple & more.</div></div></div>
+        <div class="adv-item"><div class="adv-num num-B">4</div><div><div class="adv-title">24/5 Trading</div><div class="adv-desc">Pre-market, regular and after-hours sessions.</div></div></div>
+        <div class="adv-item"><div class="adv-num num-B">5</div><div><div class="adv-title">ASIC Regulated</div><div class="adv-desc">Client funds held in regulated custody.</div></div></div>
+        <div class="adv-item"><div class="adv-num num-B">6</div><div><div class="adv-title">Seamless experience</div><div class="adv-desc">Integrated wallet, no hidden friction.</div></div></div></div>
+      </div>
+      <!-- 方案3 -->
+      <div class="plan-card" style="padding:0; overflow:hidden"><div style="padding:22px 22px 0 22px"><div class="badge bC"><span class="dot"></span><span class="zh">方案3</span><span class="en">Plan 3</span></div></div>
+      <!-- Plan 3 Screenshots -->
+      <div class="plan-card" style="padding:0; overflow:hidden"><div style="padding:22px 22px 0 22px"><div class="badge bC">Plan 3</div></div>
+        <div class="adv-row"><div class="adv-item"><div class="adv-num num-C">1</div><div><div class="adv-title">Your cash earns too</div><div class="adv-desc">Targeting competitive yield on uninvested USD, accrued daily.</div></div></div>
+        <div class="adv-item"><div class="adv-num num-C">2</div><div><div class="adv-title">Full US stock access</div><div class="adv-desc">Trade 5,000+ US stocks across pre-market, regular & after-hours, 24/5.</div></div></div>
+        <div class="adv-item"><div class="adv-num num-C">3</div><div><div class="adv-title">Fractional ownership</div><div class="adv-desc">Own a piece of Tesla, Nvidia and Apple from US$10.</div></div></div>
+@@ -337,7 +325,7 @@ <h2 class="sec-title"><span class="zh">图片优势展示</span><span class="en"
+</main>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-label"><span class="zh">Legal & Disclosures</span><span class="en">Legal & Disclosures</span></div>
+    <div class="footer-label">Legal & Disclosures</div>
+    <p class="footer-text">Investing involves risk to your capital. Value can go down as well as up. Past performance does not guarantee future results. All references are illustrative only and not recommendations. Please read FSG, PDS, and TMD before investing. Nise Invest Pty Ltd (ACN 690 010 809) is a Corporate Authorised Representative (CAR No. 001318142) of Zero Securities Pty Ltd (AFSL 244040), regulated by ASIC. Visit <a href="#">www.nise.com</a> for full terms.</p>
+  </div>
+</footer>
+@@ -355,11 +343,8 @@ <h2 class="sec-title"><span class="zh">图片优势展示</span><span class="en"
+      });
+    });
+  });
+  function setLang(lang) {
+    document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   }
-
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    height: var(--nav-h);
-    background: rgba(13,15,20,0.88);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap: 0;
-    padding: 0 24px;
-  }
-  .nav-logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.06em;
-    margin-right: 32px;
-    white-space: nowrap;
-  }
-  .nav-tabs {
-    display: flex; gap: 2px; flex: 1; overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .nav-tabs::-webkit-scrollbar { display: none; }
-  .nav-tab {
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-size: 13px; font-weight: 400;
-    color: var(--text2);
-    cursor: pointer;
-    white-space: nowrap;
-    border: none; background: none;
-    transition: color var(--transition), background var(--transition);
-  }
-  .nav-tab:hover { color: var(--text); background: var(--surface2); }
-  .nav-tab.active { color: var(--text); background: var(--surface2); font-weight: 500; }
-
-  /* ── PAGES ── */
-  .page {
-    display: none;
-    min-height: 100vh;
-    padding-top: calc(var(--nav-h) + 40px);
-    padding-bottom: 80px;
-    padding-left: 40px;
-    padding-right: 40px;
-    max-width: 960px;
-    margin: 0 auto;
-    animation: fadeUp 0.3s ease both;
-  }
-  .page.active { display: block; }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── TYPOGRAPHY ── */
-  .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
-  h1 { font-size: 32px; font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); }
-  h2 { font-size: 20px; font-weight: 600; line-height: 1.3; color: var(--text); }
-  h3 { font-size: 14px; font-weight: 600; color: var(--text); }
-  p { color: var(--text2); line-height: 1.7; }
-
-  /* ── CARDS ── */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
-  }
-  .card + .card { margin-top: 12px; }
-
-  /* ── PAGE 1: BACKGROUND ── */
-  .hero { margin-bottom: 48px; }
-  .hero h1 { margin-bottom: 8px; }
-  .hero-sub { font-size: 15px; color: var(--text2); margin-top: 8px; }
-
-  .tag {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; font-weight: 500;
-    padding: 3px 10px; border-radius: 20px;
-    border: 1px solid var(--border2);
-    color: var(--text2);
-    margin-right: 6px; margin-bottom: 6px;
-  }
-  .tag.accent { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
-  .tag.green  { border-color: var(--green); color: var(--green); background: var(--green-dim); }
-
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-
-  .stat-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 20px;
-  }
-  .stat-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
-  .stat-value { font-size: 22px; font-weight: 600; color: var(--text); }
-  .stat-sub { font-size: 12px; color: var(--text2); margin-top: 4px; }
-
-  .llm-flow {
-    display: flex; align-items: center; gap: 0;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-top: 16px;
-    overflow-x: auto;
-    gap: 0;
-  }
-  .flow-step {
-    display: flex; flex-direction: column; align-items: center;
-    text-align: center; min-width: 80px; flex: 1;
-  }
-  .flow-dot {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: var(--accent-dim); border: 1px solid var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 600; color: var(--accent);
-    margin-bottom: 6px;
-  }
-  .flow-label { font-size: 11px; color: var(--text2); line-height: 1.3; }
-  .flow-arrow { color: var(--text3); font-size: 16px; padding: 0 4px; flex-shrink: 0; margin-bottom: 14px; }
-
-  .rule-row { display: flex; gap: 10px; padding: 10px 0; border-top: 1px solid var(--border); }
-  .rule-row:first-child { border-top: none; padding-top: 0; }
-  .rule-icon { font-size: 14px; width: 20px; flex-shrink: 0; margin-top: 1px; }
-  .rule-text { font-size: 13px; color: var(--text2); line-height: 1.5; flex: 1; }
-  .rule-hl { color: var(--text); font-weight: 500; }
-
-  .section-gap { margin-top: 36px; }
-  .section-title { font-size: 13px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
-
-  /* ── PAGE 2: OVERVIEW ── */
-  .overview-row {
-    display: grid; grid-template-columns: 100px 100px 1fr 1fr;
-    gap: 0;
-    padding: 0;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    margin-bottom: 8px;
-  }
-  .overview-cell {
-    padding: 14px 18px;
-    font-size: 13px; line-height: 1.4;
-    border-right: 1px solid var(--border);
-    display: flex; align-items: center;
-  }
-  .overview-cell:last-child { border-right: none; }
-  .overview-header .overview-cell {
-    background: var(--surface2);
-    font-size: 11px; font-weight: 600;
-    color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em;
-    padding: 10px 18px;
-  }
-  .overview-body .overview-cell { background: var(--surface); }
-  .phase-pill {
-    display: inline-block;
-    font-size: 11px; font-weight: 600;
-    padding: 3px 10px; border-radius: 20px;
-    white-space: nowrap;
-  }
-  .pill-1 { background: var(--purple-dim); color: var(--purple); border: 1px solid rgba(167,139,250,0.3); }
-  .pill-2 { background: var(--green-dim); color: var(--green); border: 1px solid rgba(45,212,160,0.3); }
-  .pill-3 { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,166,35,0.3); }
-  .pill-4 { background: var(--coral-dim); color: var(--coral); border: 1px solid rgba(255,107,107,0.3); }
-
-  .timeline {
-    position: relative;
-    margin-top: 32px;
-    padding-left: 24px;
-  }
-  .timeline::before {
-    content: '';
-    position: absolute; left: 7px; top: 8px; bottom: 8px;
-    width: 2px; background: var(--border2);
-  }
-  .tl-item { position: relative; padding-bottom: 28px; }
-  .tl-item:last-child { padding-bottom: 0; }
-  .tl-dot {
-    position: absolute; left: -24px; top: 4px;
-    width: 14px; height: 14px; border-radius: 50%;
-    border: 2px solid; background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .tl-dot-1 { border-color: var(--purple); }
-  .tl-dot-2 { border-color: var(--green); }
-  .tl-dot-3 { border-color: var(--amber); }
-  .tl-dot-4 { border-color: var(--coral); }
-  .tl-week { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text3); margin-bottom: 3px; }
-  .tl-title { font-size: 13px; font-weight: 600; color: var(--text); }
-  .tl-desc { font-size: 12px; color: var(--text2); margin-top: 3px; line-height: 1.5; }
-
-  /* ── PAGE 3-6: PHASE PAGES ── */
-  .phase-header {
-    display: flex; align-items: flex-start; gap: 16px;
-    margin-bottom: 28px;
-  }
-  .phase-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 40px; font-weight: 500;
-    line-height: 1; color: var(--border2);
-    flex-shrink: 0; margin-top: 4px;
-  }
-  .phase-meta { flex: 1; }
-  .phase-week-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; color: var(--text3);
-    margin-bottom: 4px;
-  }
-  .phase-title { font-size: 26px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
-  .phase-desc { font-size: 13px; color: var(--text2); margin-top: 8px; line-height: 1.6; }
-
-  .step-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: border-color var(--transition), background var(--transition);
-  }
-  .step-card:hover { border-color: var(--border2); background: var(--surface2); }
-  .step-card.open { border-color: var(--border2); }
-  .step-head { display: flex; align-items: center; gap: 12px; }
-  .step-num-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; font-weight: 500;
-    color: var(--text3); min-width: 24px;
-    flex-shrink: 0;
-  }
-  .step-title-text { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; }
-  .step-chevron { color: var(--text3); font-size: 12px; transition: transform var(--transition); flex-shrink: 0; }
-  .step-card.open .step-chevron { transform: rotate(180deg); }
-  .step-body {
-    display: none;
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px solid var(--border);
-  }
-  .step-card.open .step-body { display: block; }
-  .step-desc-text { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 10px; }
-  .output-row { display: flex; align-items: flex-start; gap: 8px; margin-top: 8px; }
-  .output-label {
-    font-size: 11px; font-weight: 500;
-    color: var(--text3); white-space: nowrap;
-    padding-top: 1px;
-  }
-  .output-tag {
-    display: inline-block;
-    font-size: 11px; padding: 2px 10px; border-radius: 20px;
-    background: var(--accent-dim); color: var(--accent);
-    border: 1px solid rgba(79,126,255,0.25);
-  }
-  .note-block {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--amber);
-    border-radius: 0 8px 8px 0;
-    padding: 12px 16px;
-    margin-top: 20px;
-  }
-  .note-block h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-bottom: 8px; }
-  .note-item { font-size: 12px; color: var(--text2); padding: 4px 0; display: flex; gap: 8px; line-height: 1.5; }
-  .note-item::before { content: '—'; color: var(--text3); flex-shrink: 0; }
-
-  /* ── PAGE 7: MILESTONES ── */
-  .ms-grid { display: flex; flex-direction: column; gap: 12px; }
-  .ms-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 18px 22px;
-    display: grid;
-    grid-template-columns: 60px 48px 1fr;
-    gap: 16px;
-    align-items: center;
-  }
-  .ms-week {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; font-weight: 500; color: var(--text3);
-  }
-  .ms-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; font-weight: 600;
-    text-align: center;
-    padding: 4px 8px; border-radius: 6px;
-  }
-  .ms-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
-  .ms-m1 .ms-badge { background: var(--purple-dim); color: var(--purple); }
-  .ms-m2 .ms-badge { background: var(--green-dim); color: var(--green); }
-  .ms-m3 .ms-badge { background: var(--amber-dim); color: var(--amber); }
-  .ms-m4 .ms-badge { background: var(--amber-dim); color: var(--amber); }
-  .ms-m5 .ms-badge { background: var(--coral-dim); color: var(--coral); }
-
-  /* ── PAGE 8: RESOURCES & RISKS ── */
-  .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
-  .res-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 20px;
-  }
-  .res-icon { font-size: 20px; margin-bottom: 8px; }
-  .res-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-  .res-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
-  .risk-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-bottom: 10px;
-    display: flex; gap: 14px; align-items: flex-start;
-  }
-  .risk-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; font-weight: 600;
-    color: var(--coral); background: var(--coral-dim);
-    border: 1px solid rgba(255,107,107,0.25);
-    padding: 3px 8px; border-radius: 6px;
-    flex-shrink: 0; margin-top: 1px; white-space: nowrap;
-  }
-  .risk-content { flex: 1; }
-  .risk-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
-  .risk-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
-
-  /* ── MOBILE ── */
-  @media (max-width: 640px) {
-    .page { padding-left: 16px; padding-right: 16px; }
-    h1 { font-size: 24px; }
-    .grid2, .grid3, .res-grid { grid-template-columns: 1fr; }
-    .overview-row { grid-template-columns: 80px 70px 1fr; }
-    .overview-cell:nth-child(4) { display: none; }
-    .ms-card { grid-template-columns: 48px 40px 1fr; gap: 10px; }
-    .nav-logo { display: none; }
-  }
-</style>
-</head>
-<body>
-
-<nav>
-  <div class="nav-logo">GEO // 内容库</div>
-  <div class="nav-tabs">
-    <button class="nav-tab" onclick="showPage('bg')">项目背景</button>
-    <button class="nav-tab" onclick="showPage('overview')">时间框架</button>
-    <button class="nav-tab" onclick="showPage('p1')">第一阶段</button>
-    <button class="nav-tab" onclick="showPage('p2')">第二阶段</button>
-    <button class="nav-tab active" onclick="showPage('p3')">第三阶段</button>
-    <button class="nav-tab" onclick="showPage('p4')">第四阶段</button>
-    <button class="nav-tab" onclick="showPage('ms')">关键节点</button>
-    <button class="nav-tab" onclick="showPage('res')">资源 &amp; 风险</button>
-  </div>
-</nav>
-
-<!-- ══ PAGE: 项目背景 ══ -->
-<section class="page" id="page-bg">
-  <div class="hero">
-    <div class="eyebrow">GEO · Generative Engine Optimization</div>
-    <h1>内容库搭建计划</h1>
-    <p class="hero-sub">通过系统性内容建设，提升品牌在 AI 搜索引擎中的可见度与引用率</p>
-    <div style="margin-top:16px">
-      <span class="tag accent">Global 市场</span>
-      <span class="tag green">English</span>
-      <span class="tag">16 周执行计划</span>
-      <span class="tag">目标：新手客户</span>
-    </div>
-  </div>
-
-  <div class="section-title">内容类型</div>
-  <div class="grid3" style="margin-bottom:36px">
-    <div class="stat-card">
-      <div class="stat-label">类型一</div>
-      <div class="stat-value" style="font-size:16px;margin-top:4px">平台介绍类</div>
-      <div class="stat-sub">品牌与产品功能介绍，帮助新用户了解平台</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">类型二</div>
-      <div class="stat-value" style="font-size:16px;margin-top:4px">外汇入门类</div>
-      <div class="stat-sub">基础教育内容，引导新手理解外汇交易</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">类型三</div>
-      <div class="stat-value" style="font-size:16px;margin-top:4px">周报 / 市场分析</div>
-      <div class="stat-sub">定期市场内容，建立专业权威性</div>
-    </div>
-  </div>
-
-  <div class="section-title">执行策略</div>
-  <div class="card" style="margin-bottom:36px">
-    <div class="rule-row">
-      <div class="rule-icon">→</div>
-      <div class="rule-text"><span class="rule-hl">前期</span>　以巴西市场内容为基础，进行 PT→EN 翻译，快速产出 Global 站内容</div>
-    </div>
-    <div class="rule-row">
-      <div class="rule-icon">→</div>
-      <div class="rule-text"><span class="rule-hl">中期</span>　基于竞品调研，产出差异化原创内容，填补巴西站内容空白</div>
-    </div>
-    <div class="rule-row">
-      <div class="rule-icon">→</div>
-      <div class="rule-text"><span class="rule-hl">持续</span>　建立周报机制，数据驱动迭代优化，提升 AI 引用率</div>
-    </div>
-  </div>
-
-  <div class="section-title">GEO 的核心逻辑：内容先给 AI 读，再通过 AI 传递给用户</div>
-  <div class="card" style="margin-bottom:16px">
-    <p style="font-size:13px;margin-bottom:14px">传统 SEO 让文章在 Google 排名靠前，用户点击进入网站。<strong style="color:var(--text)">GEO 的逻辑不同</strong>：当用户在 ChatGPT、Perplexity、Gemini 等平台提问时，AI 引擎自动检索内容、提取关键段落、整合成回答并注明来源。我们的目标是让品牌内容成为这些 AI 引擎优先引用的来源。</p>
-    <div class="llm-flow">
-      <div class="flow-step"><div class="flow-dot">1</div><div class="flow-label">用户提问</div></div>
-      <div class="flow-arrow">›</div>
-      <div class="flow-step"><div class="flow-dot">2</div><div class="flow-label">AI 拆解子查询</div></div>
-      <div class="flow-arrow">›</div>
-      <div class="flow-step"><div class="flow-dot">3</div><div class="flow-label">RAG 检索段落</div></div>
-      <div class="flow-arrow">›</div>
-      <div class="flow-step"><div class="flow-dot">4</div><div class="flow-label">相关性评分排序</div></div>
-      <div class="flow-arrow">›</div>
-      <div class="flow-step"><div class="flow-dot">5</div><div class="flow-label">合成回答 + 引用来源</div></div>
-    </div>
-  </div>
-
-  <div class="section-title" style="margin-top:24px">金融行业 LLM 优先引用的内容结构</div>
-  <div class="card">
-    <div class="rule-row">
-      <div class="rule-icon" style="color:var(--green)">✓</div>
-      <div class="rule-text"><span class="rule-hl">独立术语定义段落</span>　关键概念（如"外汇点差"）在独立段落中给出清晰定义，AI 可直接提取</div>
-    </div>
-    <div class="rule-row">
-      <div class="rule-icon" style="color:var(--green)">✓</div>
-      <div class="rule-text"><span class="rule-hl">FAQ 结构问答对</span>　每篇文章必须包含 FAQ 模块，以问句作 H2/H3 标题，答案直接回答问题</div>
-    </div>
-    <div class="rule-row">
-      <div class="rule-icon" style="color:var(--green)">✓</div>
-      <div class="rule-text"><span class="rule-hl">段落自包含原则</span>　每段只表达一个完整观点，能脱离上下文独立理解，不出现"如上所述"</div>
-    </div>
-    <div class="rule-row">
-      <div class="rule-icon" style="color:var(--green)">✓</div>
-      <div class="rule-text"><span class="rule-hl">可验证事实陈述</span>　包含具体数据或来源的陈述，避免纯推广性语言和密集正文大段</div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ PAGE: 时间框架 ══ -->
-<section class="page" id="page-overview">
-  <div class="eyebrow">整体规划</div>
-  <h2 style="margin-bottom:24px">16 周执行时间框架</h2>
-
-  <div class="overview-row overview-header">
-    <div class="overview-cell">阶段</div>
-    <div class="overview-cell">时间</div>
-    <div class="overview-cell">主题</div>
-    <div class="overview-cell">核心目标</div>
-  </div>
-  <div class="overview-row overview-body">
-    <div class="overview-cell"><span class="phase-pill pill-1">第一阶段</span></div>
-    <div class="overview-cell" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text2)">W1–W3</div>
-    <div class="overview-cell" style="font-weight:500">准备期</div>
-    <div class="overview-cell" style="color:var(--text2);font-size:12px">完成巴西内容盘点、内容规范制定、翻译 SOP 搭建</div>
-  </div>
-  <div class="overview-row overview-body">
-    <div class="overview-cell"><span class="phase-pill pill-2">第二阶段</span></div>
-    <div class="overview-cell" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text2)">W4–W7</div>
-    <div class="overview-cell" style="font-weight:500">翻译复用</div>
-    <div class="overview-cell" style="color:var(--text2);font-size:12px">产出首批 EN 文章并上线 Global 站，基础 SEO 部署完成</div>
-  </div>
-  <div class="overview-row overview-body">
-    <div class="overview-cell"><span class="phase-pill pill-3">第三阶段</span></div>
-    <div class="overview-cell" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text2)">W8–W11</div>
-    <div class="overview-cell" style="font-weight:500">原创建设</div>
-    <div class="overview-cell" style="color:var(--text2);font-size:12px">补充内容空白、周报栏目启动、内容矩阵完善</div>
-  </div>
-  <div class="overview-row overview-body">
-    <div class="overview-cell"><span class="phase-pill pill-4">第四阶段</span></div>
-    <div class="overview-cell" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text2)">W12+</div>
-    <div class="overview-cell" style="font-weight:500">迭代运营</div>
-    <div class="overview-cell" style="color:var(--text2);font-size:12px">GEO 效果评估、内容持续扩充、运营机制固化</div>
-  </div>
-
-  <div class="section-gap"></div>
-  <div class="section-title">关键节点时间线</div>
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-dot tl-dot-1"></div>
-      <div class="tl-week">W3 末 · M1</div>
-      <div class="tl-title">准备完成，启动翻译</div>
-      <div class="tl-desc">内容盘点完成，翻译 SOP 就绪，内容团队分工确认</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot tl-dot-2"></div>
-      <div class="tl-week">W7 末 · M2</div>
-      <div class="tl-title">首批 EN 文章上线</div>
-      <div class="tl-desc">文章上线 Global 站，Search Console 数据可追踪</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot tl-dot-3"></div>
-      <div class="tl-week">W9 末 · M3</div>
-      <div class="tl-title">周报栏目启动</div>
-      <div class="tl-desc">每周稳定产出 1 篇市场分析，AI 初稿 + 合规审核机制跑通</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot tl-dot-3"></div>
-      <div class="tl-week">W11 末 · M4</div>
-      <div class="tl-title">内容库初具规模</div>
-      <div class="tl-desc">内容库累计 50+ 篇，Topic Cluster 内链结构完善</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot tl-dot-4"></div>
-      <div class="tl-week">W16 末 · M5</div>
-      <div class="tl-title">首次 GEO 效果评估</div>
-      <div class="tl-desc">输出评估报告，内容运营手册完成，进入持续运营阶段</div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ PAGE: 第一阶段 ══ -->
-<section class="page" id="page-p1">
-  <div class="phase-header">
-    <div class="phase-num">01</div>
-    <div class="phase-meta">
-      <div class="phase-week-tag">W1 – W3　·　准备期</div>
-      <div class="phase-title">调研 &amp; 资产盘点</div>
-      <div class="phase-desc">摸清现有资产、找出共性、分析差距、跑通工作流程，确保后续翻译和内容生产有据可依。</div>
-    </div>
-  </div>
-
-  <div class="step-card open" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">1.1</div>
-      <div class="step-title-text">巴西内容盘点</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">整理巴西市场现有文章数量与主题（平台介绍、外汇基础、周报分析），了解内容点击量，筛选可直接翻译的优质内容，标记需本地化改造的部分。按质量分三档：可直接翻译 / 需改造 / 不适合翻译。</div>
-      <div class="output-row"><div class="output-label">交付物</div><span class="output-tag">内容盘点表</span></div>
-    </div>
-  </div>
-
-  <div class="step-card open" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">1.2</div>
-      <div class="step-title-text">友商内容调研</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">对标 3–5 家主要交易商，调研其 Global 站内容库结构、文章类型、发布频率、SEO 表现，识别内容差距与机会点。重点关注 Topic Cluster 设计和高流量文章话题，作为后续选题参考。</div>
-      <div class="output-row"><div class="output-label">交付物</div><span class="output-tag">竞品分析报告</span></div>
-    </div>
-  </div>
-
-  <div class="step-card open" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">1.3</div>
-      <div class="step-title-text">内容规范与 LLM 结构设计</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">制定三大内容类型的写作规范（字数标准、SEO 要求、语调规范、合规要求），同时建立 LLM 可读性结构标准。核心要求：关键术语须在独立段落定义；每段只表达一个完整观点；H2/H3 标题使用描述性问句；每篇文章必须包含 FAQ 模块。需在 W2 内完成金融外汇术语词汇表（中英对照）。</div>
-      <div class="output-row" style="flex-wrap:wrap;gap:6px"><div class="output-label">交付物</div><span class="output-tag">内容规范文档 v1</span><span class="output-tag">金融术语词汇表</span></div>
-    </div>
-  </div>
-
-  <div class="step-card open" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">1.4</div>
-      <div class="step-title-text">翻译工作流搭建</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">制定从翻译到发布的全流程 SOP，包括 PT→EN 翻译规范、内部审核机制、本地化内容清理清单、发布前检查表。所有翻译工作由内容团队内部承担，无外部供应商。</div>
-      <div class="output-row"><div class="output-label">交付物</div><span class="output-tag">翻译 SOP v1</span></div>
-    </div>
-  </div>
-
-  <div class="note-block">
-    <h3>注意事项</h3>
-    <div class="note-item">1.1 内容盘点是第二阶段选题的直接依据，W1 优先启动，同步进行友商调研</div>
-    <div class="note-item">术语词汇表需 W2 前完成，覆盖外汇核心术语（杠杆、点差、保证金、止损等），避免后期翻译返工</div>
-    <div class="note-item">W1 内确认内容团队人员分工，明确谁负责翻译、谁负责审核</div>
-  </div>
-</section>
-
-<!-- ══ PAGE: 第二阶段 ══ -->
-<section class="page" id="page-p2">
-  <div class="phase-header">
-    <div class="phase-num">02</div>
-    <div class="phase-meta">
-      <div class="phase-week-tag">W4 – W7　·　翻译复用</div>
-      <div class="phase-title">巴西 PT → EN Global</div>
-      <div class="phase-desc">快速产量阶段。利用巴西现有优质内容完成 PT→EN 翻译，巴西站缺失的话题进行原创补充，上线首批 Global 站文章，完成基础 SEO 配置与数据埋点。</div>
-    </div>
-  </div>
-
-  <div class="step-card open" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">2.1</div>
-      <div class="step-title-text">内容翻译：平台介绍类</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">以巴西市场现有文章为基础，优先选取质量高、通用性强的内容进行 PT→EN 翻译，移除巴西特定监管表述（CVM/BCB 等），替换为 Global 通用表述。巴西站无对应内容的话题，结合友商调研结果进行原创补充。</div>
-      <div class="output-row"><div class="output-label">目标</div><span class="output-tag">翻译 + 原创合计覆盖平台介绍核心话题</span></div>
-    </div>
-  </div>
-
-  <div class="step-card open" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">2.2</div>
-      <div class="step-title-text">内容翻译：外汇入门类</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">覆盖新手必读话题：什么是外汇、点差/杠杆/保证金解释、如何开始第一笔交易、常见风险等。优先翻译巴西站已有的对应文章，缺失话题进行原创补充。文章数量以第一阶段盘点结果为准，优先保证内容质量与话题完整性。</div>
-      <div class="output-row"><div class="output-label">目标</div><span class="output-tag">翻译 + 原创合计覆盖外汇入门核心话题</span></div>
-    </div>
-  </div>
-
-  <div class="step-card open" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">2.3</div>
-      <div class="step-title-text">内容上线与基础 SEO 部署</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">文章上线 Global 网站后，同步完成基础 SEO 配置：Meta Title/Description、内链、Schema Markup（Article）、Sitemap 提交，并接入 GA4 + Search Console 数据追踪，确保上线即可监测流量表现。</div>
-      <div class="output-row"><div class="output-label">需要</div><span class="output-tag">技术人员支持 SEO 配置与上线部署</span></div>
-    </div>
-  </div>
-
-  <div class="step-card open" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">2.4</div>
-      <div class="step-title-text">翻译质量回顾 &amp; 流程优化</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">首批文章上线后进行质量评审，重点核查翻译准确性、术语统一性、本地化内容是否清理干净，收集反馈后更新术语词汇表和审核 SOP，供后续内容生产参考执行。</div>
-      <div class="output-row"><div class="output-label">交付物</div><span class="output-tag">优化后的翻译 SOP v2</span></div>
-    </div>
-  </div>
-
-  <div class="note-block">
-    <h3>注意事项</h3>
-    <div class="note-item">翻译选题以巴西内容盘点结果为准，含本地监管（CVM/BCB）或本地支付的文章改造成本高，直接原创替代</div>
-    <div class="note-item">W7 末为阶段收口节点，上线数量以实际盘点与执行情况为准，确保已上线内容可被 Search Console 追踪</div>
-    <div class="note-item">翻译质量回顾（2.4）在首批文章上线后尽快执行，更新后的 SOP 同步给后续内容生产使用</div>
-  </div>
-</section>
-
-<!-- ══ PAGE: 第三阶段 ══ -->
-<section class="page active" id="page-p3">
-  <div class="phase-header">
-    <div class="phase-num">03</div>
-    <div class="phase-meta">
-      <div class="phase-week-tag">W8 – W11　·　原创建设</div>
-      <div class="phase-title">内容空白补充 &amp; 周报启动</div>
-      <div class="phase-desc">补充第二阶段中巴西内容未能覆盖的话题，以原创方式填补内容空白，同步启动周报栏目，完善内容库结构。</div>
-    </div>
-  </div>
-
-  <div class="step-card open" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">3.1</div>
-      <div class="step-title-text">周报 / 市场分析栏目启动</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">建立固定周报模板（宏观数据回顾 + 主要货币对分析 + 下周关注点），由 AI 工具生成初稿，内容团队负责事实核查、润色和合规审核后发布，确定每周固定发布节奏。</div>
-      <div class="output-row" style="flex-wrap:wrap;gap:6px"><div class="output-label">交付物</div><span class="output-tag">周报模板</span><span class="output-tag">首批试运行 2–3 篇</span></div>
-    </div>
-  </div>
-
-  <div class="step-card open" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">3.2</div>
-      <div class="step-title-text">内容空白补充：原创文章</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">针对第二阶段因巴西内容缺失而未能覆盖的话题，结合友商调研结果进行原创补充。选题以内容盘点中标记的"空白项"和竞品高流量话题为参考，重点覆盖新手关注的核心问题，数量以实际缺口为准，不设硬性指标。</div>
-      <div class="output-row"><div class="output-label">交付物</div><span class="output-tag">原创文章（数量以内容空白盘点为准）</span></div>
-    </div>
-  </div>
-
-  <div class="step-card" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">3.3</div>
-      <div class="step-title-text">内容矩阵梳理 &amp; 内链优化</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">梳理已发布内容，建立 Topic Cluster 结构（核心页 + 支撑文章），强化内链网络，提升 AI 搜索引擎（Perplexity、ChatGPT Search 等）对内容的可引用性。Topic Cluster 是 GEO 效果的核心，AI 搜索引擎更倾向引用结构清晰的主题集群。</div>
-      <div class="output-row"><div class="output-label">交付物</div><span class="output-tag">内容地图 v1</span></div>
-    </div>
-  </div>
-
-  <div class="note-block">
-    <h3>注意事项</h3>
-    <div class="note-item">周报初稿由 AI 工具生成，内容团队负责核查数据准确性并润色，每篇发布前须经合规团队审核</div>
-    <div class="note-item">Topic Cluster 建设（3.3）是 GEO 效果的关键，内链部署建议与文章上线同步推进，不要事后补做</div>
-  </div>
-</section>
-
-<!-- ══ PAGE: 第四阶段 ══ -->
-<section class="page" id="page-p4">
-  <div class="phase-header">
-    <div class="phase-num">04</div>
-    <div class="phase-meta">
-      <div class="phase-week-tag">W12 – 持续　·　迭代运营</div>
-      <div class="phase-title">数据驱动，持续优化</div>
-      <div class="phase-desc">进入常态化运营，重点建立数据闭环，基于效果持续优化内容，固化内容生产的长效运营机制。</div>
-    </div>
-  </div>
-
-  <div class="step-card open" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">4.1</div>
-      <div class="step-title-text">GEO 效果首次评估</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">统计各文章在 AI 搜索引擎中的引用频次，结合 Search Console 展示量/点击率、自然流量增长数据，分析新手用户注册转化率，与基线对比输出评估报告。重点追踪 Perplexity / ChatGPT Search 引用频次。</div>
-      <div class="output-row"><div class="output-label">交付物</div><span class="output-tag">GEO 效果报告 v1</span></div>
-    </div>
-  </div>
-
-  <div class="step-card" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">4.2</div>
-      <div class="step-title-text">内容迭代与持续补充</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">基于数据结果，对流量低/引用少的文章进行优化更新；对表现好的话题延伸新文章；保持周报稳定输出，目标月均 4 篇，持续扩充内容库广度。</div>
-      <div class="output-row"><div class="output-label">持续</div><span class="output-tag">内容团队持续投入</span></div>
-    </div>
-  </div>
-
-  <div class="step-card" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">4.3</div>
-      <div class="step-title-text">内容持续扩充与 GEO 深化</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">根据 GEO 效果评估结果，延伸表现好的话题，补充新文章；优化 FAQ 模块与定义段落的结构，提升 AI 搜索引擎引用率；周报持续稳定产出，每月 4 篇。</div>
-      <div class="output-row" style="flex-wrap:wrap;gap:6px"><div class="output-label">目标</div><span class="output-tag">新增文章若干</span><span class="output-tag">周报月均 4 篇</span></div>
-    </div>
-  </div>
-
-  <div class="step-card" onclick="toggleStep(this)">
-    <div class="step-head">
-      <div class="step-num-badge">4.4</div>
-      <div class="step-title-text">内容运营机制固化</div>
-      <div class="step-chevron">▼</div>
-    </div>
-    <div class="step-body">
-      <div class="step-desc-text">建立内容排期表（提前规划每篇文章的题目、类型、负责人与发布日期）、季度竞品复盘机制、内容质量评分体系，形成内容团队可持续执行的生产流程，输出内容运营手册。</div>
-      <div class="output-row"><div class="output-label">交付物</div><span class="output-tag">内容运营手册</span></div>
-    </div>
-  </div>
-
-  <div class="note-block">
-    <h3>注意事项</h3>
-    <div class="note-item">GEO 效果评估（4.1）除传统 SEO 指标外，需重点追踪 AI 搜索引擎引用频次（Perplexity / ChatGPT）</div>
-    <div class="note-item">内容运营手册需包含排期表模板和周报生产流程，确保后续执行有据可依</div>
-    <div class="note-item">内容排期表建议每两周更新一次，保持 2–3 周的提前量，避免临时赶稿影响质量</div>
-  </div>
-</section>
-
-<!-- ══ PAGE: 关键节点 ══ -->
-<section class="page" id="page-ms">
-  <div class="eyebrow">验收节点</div>
-  <h2 style="margin-bottom:24px">关键节点</h2>
-  <div class="ms-grid">
-    <div class="ms-card ms-m1">
-      <div class="ms-week">W3 末</div>
-      <div class="ms-badge">M1</div>
-      <div class="ms-text">内容盘点完成，翻译 SOP 就绪，内容团队分工确认，正式启动翻译工作</div>
-    </div>
-    <div class="ms-card ms-m2">
-      <div class="ms-week">W7 末</div>
-      <div class="ms-badge">M2</div>
-      <div class="ms-text">首批 EN 文章上线 Global 站（数量以盘点结果为准），Search Console 数据可追踪</div>
-    </div>
-    <div class="ms-card ms-m3">
-      <div class="ms-week">W9 末</div>
-      <div class="ms-badge">M3</div>
-      <div class="ms-text">周报栏目正式启动，每周稳定产出 1 篇市场分析文章</div>
-    </div>
-    <div class="ms-card ms-m4">
-      <div class="ms-week">W11 末</div>
-      <div class="ms-badge">M4</div>
-      <div class="ms-text">内容库累计达到 50+ 篇，Topic Cluster 内链结构完善</div>
-    </div>
-    <div class="ms-card ms-m5">
-      <div class="ms-week">W16 末</div>
-      <div class="ms-badge">M5</div>
-      <div class="ms-text">GEO 效果首次评估报告产出，内容运营手册完成，进入持续运营阶段</div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ PAGE: 资源 & 风险 ══ -->
-<section class="page" id="page-res">
-  <div class="eyebrow">执行保障</div>
-  <h2 style="margin-bottom:20px">资源 &amp; 风险</h2>
-
-  <div class="section-title">关键资源依赖</div>
-  <div class="res-grid">
-    <div class="res-card">
-      <div class="res-icon">✍️</div>
-      <div class="res-title">内容团队（核心）</div>
-      <div class="res-desc">承接全部内容生产工作，包括翻译（PT→EN）、原创写作、AI 辅助周报的核查与润色</div>
-    </div>
-    <div class="res-card">
-      <div class="res-icon">🤖</div>
-      <div class="res-title">AI 工具</div>
-      <div class="res-desc">用于周报初稿生成，内容团队负责数据核查与润色</div>
-    </div>
-    <div class="res-card">
-      <div class="res-icon">⚖️</div>
-      <div class="res-title">合规团队</div>
-      <div class="res-desc">负责所有文章（尤其是周报/市场分析类）发布前的合规审核</div>
-    </div>
-    <div class="res-card">
-      <div class="res-icon">🔧</div>
-      <div class="res-title">SEO 技术支持</div>
-      <div class="res-desc">基础 SEO 配置、Sitemap 提交、数据追踪搭建由技术人员提供支持</div>
-    </div>
-  </div>
-
-  <div class="section-title" style="margin-top:28px">主要风险与应对</div>
-  <div class="risk-card">
-    <div class="risk-num">风险 1</div>
-    <div class="risk-content">
-      <div class="risk-title">翻译效率</div>
-      <div class="risk-desc">翻译工作由内容团队内部承担，建议 W1 确认人员分工并梳理 AI 辅助翻译工具流程，避免产能瓶颈</div>
-    </div>
-  </div>
-  <div class="risk-card">
-    <div class="risk-num">风险 2</div>
-    <div class="risk-content">
-      <div class="risk-title">术语准确性</div>
-      <div class="risk-desc">翻译金融术语准确性不足，需在 W2 前完成术语词汇表并纳入内部审核要求</div>
-    </div>
-  </div>
-  <div class="risk-card">
-    <div class="risk-num">风险 3</div>
-    <div class="risk-content">
-      <div class="risk-title">周报质量</div>
-      <div class="risk-desc">周报由内容团队借助 AI 产出，初期需建立标准模板与审核机制，确保内容专业性与准确性</div>
-    </div>
-  </div>
-</section>
-
-<script>
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  event.target.classList.add('active');
-  window.scrollTo(0, 0);
-}
-
-function toggleStep(card) {
-  const isOpen = card.classList.contains('open');
-  card.classList.toggle('open', !isOpen);
-}
+  // Force english only, remove any language toggles
+  document.documentElement.lang = "en";
 </script>
-
-
-</body></html>
+</body>
+</html>
